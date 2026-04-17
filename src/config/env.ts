@@ -1,7 +1,7 @@
 import z from "zod";
 import dotenv from "dotenv";
 
-dotenv.config();
+dotenv.config({ path: ".env.local" });
 
 const EnvSchema = z.object({
   // DB_HOST: z.string().nonempty(),
@@ -10,7 +10,7 @@ const EnvSchema = z.object({
   // DB_NAME: z.string().nonempty(),
   // DB_PORT: z.coerce.number().default(3306),
   DATABASE_URL: z.string().nonempty(),
-  PORT: z.coerce.number(),
+  PORT: z.coerce.number().default(5000),
 });
 
 const parsed = EnvSchema.safeParse(process.env);
