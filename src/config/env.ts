@@ -10,7 +10,7 @@ const EnvSchema = z.object({
   // DB_NAME: z.string().nonempty(),
   // DB_PORT: z.coerce.number().default(3306),
   DATABASE_URL: z.string().nonempty(),
-  PORT: z.coerce.number().default(5000),
+  PORT: z.coerce.number(),
 });
 
 const parsed = EnvSchema.safeParse(process.env);
