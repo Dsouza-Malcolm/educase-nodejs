@@ -2,12 +2,12 @@ import app from "./app.js";
 import { db } from "./config/db.js";
 import { ENV } from "./config/env.js";
 
-app.listen(ENV.PORT, async () => {
+app.listen(ENV.PORT, "0.0.0.0", async () => {
   try {
-    await db.query("SELECT 1"); // ✅ test connection
-    console.log("✅ Database connected");
+    await db.query("SELECT 1");
+    console.log("Database connected");
   } catch (error) {
-    console.error("❌ DB connection failed:", error);
+    console.error("DB connection failed:", error);
     process.exit(1);
   }
 
