@@ -1,6 +1,7 @@
 import type { Request, Response, Errback, NextFunction } from "express";
 import { ApiError } from "../lib/api/error.js";
 import logger from "../lib/logger.js";
+import { ZodError } from "zod";
 
 export const errorMiddleware = (
   err: unknown,
@@ -14,6 +15,17 @@ export const errorMiddleware = (
   if (err instanceof ApiError) {
     statusCode = err.statusCode;
     message = err.message;
+  }
+
+  if (err instanceof ZodError) {
+    return res.status(400).json({
+      success: false,
+      message: "Validation failed",
+      errors: err.issues.map((issue) => ({
+        field: issue.path.join("."),
+        message: issue.message,
+      })),
+    });
   }
 
   if (err instanceof Error) {

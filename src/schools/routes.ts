@@ -1,10 +1,10 @@
 import { Router } from "express";
-import { addSchool } from "./controller.js";
+import { addSchool, listSchools } from "./controller.js";
 
 const router = Router();
 
 router.post("/addSchool", addSchool);
 
-router.get("/listSchools");
+router.get("/listSchools", listSchools);
 
 export default router;
