@@ -11,3 +11,8 @@ export const findSchoolInputSchema = schoolSchema.pick({
   name: true,
   address: true,
 });
+
+export const schoolCoordinatesSchema = schoolSchema.pick({
+  latitude: true,
+  longitude: true,
+});

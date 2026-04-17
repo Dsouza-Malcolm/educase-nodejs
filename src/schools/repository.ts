@@ -19,6 +19,14 @@ export const createSchool = async (data: CreateSchool) => {
   };
 };
 
+export const fetchSchools = async (): Promise<SchoolRow[]> => {
+  const sql = `SELECT * FROM schools`;
+
+  const [rows] = await db.query<(SchoolRow & RowDataPacket)[]>(sql);
+
+  return rows;
+};
+
 export const findSchoolByNameAndAddress = async (data: FindSchoolInput) => {
   const { name, address } = data;
 
