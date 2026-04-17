@@ -1,20 +1,15 @@
 import app from "./app.js";
 import { db } from "./config/db.js";
+import { ENV } from "./config/env.js";
 
-const PORT = 5000;
-
-app.listen(PORT, async () => {
+app.listen(ENV.PORT, async () => {
   try {
     await db.query("SELECT 1"); // ✅ test connection
     console.log("✅ Database connected");
-
-    app.listen(PORT, () => {
-      console.log(`🚀 Server running on port ${PORT}`);
-    });
   } catch (error) {
     console.error("❌ DB connection failed:", error);
     process.exit(1);
   }
 
-  console.log(`Server running on port ${PORT}`);
+  console.log(`Server running on port ${ENV.PORT}`);
 });
